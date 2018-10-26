@@ -47,6 +47,9 @@ TEST(Test3, wordsCounter) {
   // разделяем точками
   words = wordsCounter("hello.good.world");
   EXPECT_EQ(3, words);
+  // совместное разделение
+  words = wordsCounter("hi,dear how.dear");
+  EXPECT_EQ(4, words);
   // раздеяем запятыми
   words = wordsCounter("hi,dear,how,dear");
   EXPECT_EQ(4, words);
@@ -69,11 +72,19 @@ TEST(Test4, wordsMapCounter) {
   std::map<std::string, int> words = wordsMapCounter("can you can");
   EXPECT_EQ(2, words["can"]);
   EXPECT_EQ(1, words["you"]);
+  EXPECT_EQ(2, words.size());
   // с точками
   words = wordsMapCounter("hello.good.world");
   EXPECT_EQ(1, words["hello"]);
   EXPECT_EQ(1, words["good"]);
   EXPECT_EQ(1, words["world"]);
+  EXPECT_EQ(3, words.size());
+  // c разными знаками
+  words = wordsMapCounter("hi,dear how.dear.");
+  EXPECT_EQ(2, words["dear"]);
+  EXPECT_EQ(1, words["hi"]);
+  EXPECT_EQ(1, words["how"]);
+  EXPECT_EQ(3, words.size());
   // c запятыми
   words = wordsMapCounter("hi,dear,how,dear");
   EXPECT_EQ(2, words["dear"]);
@@ -83,9 +94,11 @@ TEST(Test4, wordsMapCounter) {
   words = wordsMapCounter("Can you can");
   EXPECT_EQ(2, words["can"]);
   EXPECT_EQ(1, words["you"]);
+  EXPECT_EQ(2, words.size());
   // одно слово
   words = wordsMapCounter("hello");
   EXPECT_EQ(1, words["hello"]);
+  EXPECT_EQ(1, words.size());
   // пустая строка
   words = wordsMapCounter("");
   EXPECT_EQ(true, words.empty());
@@ -108,6 +121,10 @@ TEST(Test5, uniqueWords) {
   EXPECT_EQ(unique, result);
   // c точкой
   unique = uniqueWords("Can.you.can.a.can.now");
+  result = {"can", "you", "a", "now"};
+  EXPECT_EQ(unique, result);
+  // c разными знаками
+  unique = uniqueWords("Can you,can.a.can now.");
   result = {"can", "you", "a", "now"};
   EXPECT_EQ(unique, result);
   // одно слово
@@ -138,9 +155,12 @@ TEST(Test6, diffWordsCounter) {
   // точки
   words = diffWordsCounter("can.you.can.a.can.now");
   EXPECT_EQ(4, words);
+  // разные знаки
+  words = diffWordsCounter("can you,can.a can.now,");
+  EXPECT_EQ(4, words);
   // заглавная буква
   words = diffWordsCounter("Can you can a can");
-  EXPECT_EQ(3, words);
+  EXPECT_EQ(4, words);
   // одно слово
   words = diffWordsCounter("can");
   EXPECT_EQ(1, words);
