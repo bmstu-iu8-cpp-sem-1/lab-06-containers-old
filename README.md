@@ -58,11 +58,11 @@ std::vector<int>::iterator findInSorted(std::vector<int>::iterator first, std::v
 std::vector<int> v = {1, 2, 3, 4, 5};
 std::vector<int>::iterator it = findInSorted(v.begin(), v.end(), 2);
 ```
-3. Реализуйте функцию, которая считает количество слов в предложении. Слова разделяются или `' '`, или `','` или `'.'`.
+3. Реализуйте функцию, которая считает количество слов в предложении. Слова могут разделяться `' '` и `','` и `'.'`.
 Одинаковые слова, начинающиеся с заглавной и строчной буквы, считать различными.
 Прототип функции:
 ```cpp
-int wordsCounter(std::string str);
+int wordsCounter(const std::string& str);
 ```
 Пример использования функции:
 ```cpp
@@ -81,7 +81,7 @@ std::map<std::string, int> words = wordsMapCounter("can you can");
 
 Прототип функции:
 ```cpp
-std::vector<std::string> uniqueWords(std::string str);
+std::vector<std::string> uniqueWords(const std::string& str);
 ```
 Пример использования функции:
 ```cpp
