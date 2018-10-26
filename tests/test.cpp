@@ -113,19 +113,19 @@ TEST(Test4, wordsMapCounter) {
 TEST(Test5, uniqueWords) {
   // базовый сценарий
   std::vector<std::string> unique = uniqueWords("Can you can");
-  std::vector<std::string> result = {"can", "you"};
+  std::vector<std::string> result = {"Can", "you", "can"};
   EXPECT_EQ(unique, result);
   // с запятой
   unique = uniqueWords("Can,you,can,a,can");
-  result = {"can", "you", "a"};
+  result = {"Can", "you", "can", "a"};
   EXPECT_EQ(unique, result);
   // c точкой
   unique = uniqueWords("Can.you.can.a.can.now");
-  result = {"can", "you", "a", "now"};
+  result = {"Can", "you", "can", "a", "now"};
   EXPECT_EQ(unique, result);
   // c разными знаками
   unique = uniqueWords("Can you,can.a.can now.");
-  result = {"can", "you", "a", "now"};
+  result = {"Can", "you", "can", "a", "now"};
   EXPECT_EQ(unique, result);
   // одно слово
   unique = uniqueWords("hi");
