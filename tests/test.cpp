@@ -45,7 +45,7 @@ TEST(Test3, wordsCounter) {
   int words = wordsCounter("can you can");
   EXPECT_EQ(3, words);
   // разделяем точками
-  words = wordsCounter("hello.good.world");
+  words = wordsCounter("hello.good. world");
   EXPECT_EQ(3, words);
   // совместное разделение
   words = wordsCounter("hi,dear how.dear");
@@ -74,7 +74,7 @@ TEST(Test4, wordsMapCounter) {
   EXPECT_EQ(1, words["you"]);
   EXPECT_EQ(2, words.size());
   // с точками
-  words = wordsMapCounter("hello.good.world");
+  words = wordsMapCounter("hello.good. world");
   EXPECT_EQ(1, words["hello"]);
   EXPECT_EQ(1, words["good"]);
   EXPECT_EQ(1, words["world"]);
@@ -116,15 +116,15 @@ TEST(Test5, uniqueWords) {
   std::vector<std::string> result = {"Can", "you", "can"};
   EXPECT_EQ(unique, result);
   // с запятой
-  unique = uniqueWords("Can,you,can,a,can");
+  unique = uniqueWords("Can,you, can,a,can");
   result = {"Can", "you", "can", "a"};
   EXPECT_EQ(unique, result);
   // c точкой
-  unique = uniqueWords("Can.you.can.a.can.now");
+  unique = uniqueWords("Can.you. can.a.can.now");
   result = {"Can", "you", "can", "a", "now"};
   EXPECT_EQ(unique, result);
   // c разными знаками
-  unique = uniqueWords("Can you,can.a.can now.");
+  unique = uniqueWords("Can you,can. a.can now.");
   result = {"Can", "you", "can", "a", "now"};
   EXPECT_EQ(unique, result);
   // одно слово
@@ -150,13 +150,13 @@ TEST(Test6, diffWordsCounter) {
   int words = diffWordsCounter("can you can a can");
   EXPECT_EQ(3, words);
   // запятые
-  words = diffWordsCounter("can,you,can");
+  words = diffWordsCounter("can,you, can");
   EXPECT_EQ(2, words);
   // точки
-  words = diffWordsCounter("can.you.can.a.can.now");
+  words = diffWordsCounter("can.you. can.a.can.now");
   EXPECT_EQ(4, words);
   // разные знаки
-  words = diffWordsCounter("can you,can.a can.now,");
+  words = diffWordsCounter("can you,can. a can.now,");
   EXPECT_EQ(4, words);
   // заглавная буква
   words = diffWordsCounter("Can you can a can");
@@ -237,9 +237,9 @@ TEST(Test8, plusesDeleter) {
 
 TEST(Test9, sort) {
   // базовый сценарий
-  std::list<int> nums = {1, 5, 4, -3};
+  std::list<int> nums = {1, 5, 1, 4, -3};
   sort(nums);
-  std::list<int> result = {5, 4, 1, -3};
+  std::list<int> result = {5, 4, 1, 1, -3};
   EXPECT_EQ(nums, result);
   // с нулем
   nums = {1, 5, 4, -3, 0};
